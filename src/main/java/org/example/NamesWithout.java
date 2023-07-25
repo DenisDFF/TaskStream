@@ -9,7 +9,8 @@ public class NamesWithout {
         for (String line : lines) {
             String[] words = line.split("\\s+");
             for (String word : words) {
-                wordsList.add(word);
+                String cleanword = word.replace(",", "");
+                wordsList.add(cleanword);
             }
         }
         return wordsList;
