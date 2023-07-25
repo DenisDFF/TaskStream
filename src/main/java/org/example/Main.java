@@ -1,8 +1,4 @@
 package org.example;
-
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -18,8 +14,14 @@ public class Main {
         Names1357 namesFilter = new Names1357();
         namesFilter.filterNames(nameswithword);
         List<String> filteredNames = namesFilter.namesOk;
-
         System.out.println(filteredNames);
 
+        sortAndConvertToUpperCase nameProzesor = new sortAndConvertToUpperCase();
+        List<String> sortedUpperCaseNames = sortAndConvertToUpperCase.sortAndConvertToUpperCase(nameswithword);
+        System.out.println(sortedUpperCaseNames);
+
+
+
+        System.out.println(nameswithword.get(1));
     }
     }
