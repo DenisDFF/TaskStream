@@ -1,5 +1,7 @@
 package org.example;
 import java.util.List;
+import java.util.function.UnaryOperator;
+import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
@@ -27,8 +29,14 @@ public class Main {
         List<String> sortedUpperCaseNames = sortAndConvertToUpperCase.sortAndConvertToUpperCase(nameswithword);
         System.out.println(sortedUpperCaseNames);
 
+        RandomNumber randomNumberMethod = new RandomNumber();
 
+        long a = 25214903917L;
+        long c = 11L;
+        long m = (long) Math.pow(2, 48);
 
-        System.out.println(nameswithword.get(1));
+        Stream<Long> Randomaiz = randomNumberMethod.creatRandomNumber(a, c, m);
+        Randomaiz.limit(10).forEach(System.out::println);
+
     }
     }
