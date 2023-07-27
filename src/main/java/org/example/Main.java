@@ -38,5 +38,13 @@ public class Main {
         Stream<Long> Randomaiz = randomNumberMethod.creatRandomNumber(a, c, m);
         Randomaiz.limit(10).forEach(System.out::println);
 
+        Stream<Integer> first = Stream.of(11, 12, 13, 16);
+        Stream<Integer> second = Stream.of(22,54,23,65);
+
+
+        Peremishaty mergedit = new Peremishaty();
+
+        Stream<Integer> Merget = mergedit.zip(first, second);
+        Merget.forEach(System.out::println);
     }
     }
