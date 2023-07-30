@@ -1,18 +1,15 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class NamesWithout {
     public List<String> splitWords(List<String> lines) {
-        List<String> wordsList = new ArrayList<>();
-        for (String line : lines) {
-            String[] words = line.split("\\s+");
-            for (String word : words) {
-                String cleanword = word.replace(",", "");
-                wordsList.add(cleanword);
-            }
-        }
-        return wordsList;
+        return lines.stream()
+                .flatMap(line -> Arrays.stream(line.split("\\s+")))
+                .map(word -> word.replace(",", ""))
+                .collect(Collectors.toList());
     }
 }

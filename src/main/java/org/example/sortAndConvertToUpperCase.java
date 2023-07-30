@@ -6,13 +6,11 @@ import java.util.Collections;
 import java.util.List;
 
     public class sortAndConvertToUpperCase {
-        public static List<String> sortAndConvertToUpperCase(List<String> nameswithword) {
-            List<String> result = new ArrayList<>();
-            for (String s : nameswithword) {
-                result.add(s.toUpperCase());
-            }
-            Collections.sort(result, Collections.reverseOrder());
-            return result;
+        public static List<String> sortAndConvertToUpperCase(List<String> namesWithWord) {
+            return namesWithWord.stream()
+                    .map(String::toUpperCase)
+                    .sorted(Collections.reverseOrder())
+                    .toList(); // Якщо ви використовуєте Java 16+
         }
     }
 

@@ -1,50 +1,101 @@
 package org.example;
+
+import java.util.Iterator;
 import java.util.List;
-import java.util.function.UnaryOperator;
+import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
         String NamesFile = "NamesFile.txt";
-        String[] number = { "1, 2, 0", "4, 5" };
+        String[] number = {"1, 2, 0", "4, 5"};
 
-        ReaderNamesFile readerNamesFile = new ReaderNamesFile();
-        List<String> namesFile = readerNamesFile.namesReader(NamesFile);
+        List<String> namesFile = readNamesFromFile(NamesFile);
+        List<String> namesWithWord = splitWords(namesFile);
+        List<String> numbersWithWord = splitWords(Arrays.asList(number));
+        System.out.println(numbersWithWord);
 
-        NamesWithout without = new NamesWithout();
-        List<String> nameswithword = without.splitWords(namesFile);
-        List<String> numberwithword = without.splitWords(List.of(number));
-        System.out.println(numberwithword);
+        List<String> numberCleaningAndSorted = numberSort(numbersWithWord);
+        System.out.println(numberCleaningAndSorted);
 
-        numbersort numerFilterandClen = new numbersort();
-        List<String> numbercliningandsorted = numbersort.numberSort(numberwithword);
-        System.out.println(numbercliningandsorted);
-
-        Names1357 namesFilter = new Names1357();
-        namesFilter.filterNames(nameswithword);
-        List<String> filteredNames = namesFilter.namesOk;
+        List<String> filteredNames = filterNames(namesWithWord);
         System.out.println(filteredNames);
 
-        sortAndConvertToUpperCase nameProzesor = new sortAndConvertToUpperCase();
-        List<String> sortedUpperCaseNames = sortAndConvertToUpperCase.sortAndConvertToUpperCase(nameswithword);
+        List<String> sortedUpperCaseNames = sortAndConvertToUpperCase(namesWithWord);
         System.out.println(sortedUpperCaseNames);
 
         RandomNumber randomNumberMethod = new RandomNumber();
-
         long a = 25214903917L;
         long c = 11L;
         long m = (long) Math.pow(2, 48);
-
-        Stream<Long> Randomaiz = randomNumberMethod.creatRandomNumber(a, c, m);
-        Randomaiz.limit(10).forEach(System.out::println);
+        Stream<Long> randomStream = createRandomNumber(a, c, m);
+        randomStream.limit(10).forEach(System.out::println);
 
         Stream<Integer> first = Stream.of(11, 12, 13, 16);
-        Stream<Integer> second = Stream.of(22,54,23,65);
-
-
-        Peremishaty mergedit = new Peremishaty();
-
-        Stream<Integer> Merget = mergedit.zip(first, second);
-        Merget.forEach(System.out::println);
+        Stream<Integer> second = Stream.of(22, 54, 23, 65, 75, 15);
+        Stream<Integer> merged = zipStreams(first, second);
+        merged.forEach(System.out::println);
     }
+
+    // Метод для читання списку імен з файлу
+    private static List<String> readNamesFromFile(String filename) {
+        ReaderNamesFile readerNamesFile = new ReaderNamesFile();
+        return readerNamesFile.namesReader(filename);
     }
+
+    // Метод для розділення слів у списку
+    private static List<String> splitWords(List<String> inputList) {
+        NamesWithout without = new NamesWithout();
+        return without.splitWords(inputList);
+    }
+
+    // Метод для сортування і фільтрації списку чисел
+    private static List<String> numberSort(List<String> inputList) {
+        Numbersort numerFilterandClen = new Numbersort();
+        return numerFilterandClen.numberSort(inputList);
+    }
+
+    // Метод для фільтрації списку імен
+    private static List<String> filterNames(List<String> inputList) {
+        Names1357 namesFilter = new Names1357();
+        namesFilter.filterNames(inputList);
+        return namesFilter.namesOk;
+    }
+
+    // Метод для сортування і перетворення імен у верхній регістр
+    private static List<String> sortAndConvertToUpperCase(List<String> inputList) {
+        sortAndConvertToUpperCase nameProzesor = new sortAndConvertToUpperCase();
+        return sortAndConvertToUpperCase.sortAndConvertToUpperCase(inputList);
+    }
+
+
+    private static Stream<Long> createRandomNumber(long a, long c, long m) {
+        RandomNumber randomNumberMethod = new RandomNumber();
+        return randomNumberMethod.creatRandomNumber(a, c, m);
+    }
+
+
+    private static Stream<Integer> zipStreams(Stream<Integer> first, Stream<Integer> second) {
+        Iterator<Integer> iteratorFirst = first.iterator();
+        Iterator<Integer> iteratorSecond = second.iterator();
+
+        return Stream.generate(() -> {
+                    if (iteratorFirst.hasNext() && iteratorSecond.hasNext()) {
+                        return iteratorFirst.next();
+                    } else {
+                        return null; // Зупиняємо генерацію стріму, коли розмір `first` стає 0 або немає елементів у `second`
+                    }
+                }).takeWhile(Objects::nonNull) // Зупиняємо стрім, коли зустрічаємо null
+                .flatMap(val -> {
+                    if (iteratorSecond.hasNext()) {
+                        return Stream.of(val, iteratorSecond.next());
+                    } else {
+                        return Stream.of(val);
+                    }
+                });
+    }
+}
