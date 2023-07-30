@@ -3,9 +3,6 @@ package org.example;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import java.util.Arrays;
 
@@ -41,32 +38,36 @@ public class Main {
         merged.forEach(System.out::println);
     }
 
-    // Метод для читання списку імен з файлу
+
+
+
+
+
     private static List<String> readNamesFromFile(String filename) {
         ReaderNamesFile readerNamesFile = new ReaderNamesFile();
         return readerNamesFile.namesReader(filename);
     }
 
-    // Метод для розділення слів у списку
+
     private static List<String> splitWords(List<String> inputList) {
         NamesWithout without = new NamesWithout();
         return without.splitWords(inputList);
     }
 
-    // Метод для сортування і фільтрації списку чисел
+
     private static List<String> numberSort(List<String> inputList) {
         Numbersort numerFilterandClen = new Numbersort();
         return numerFilterandClen.numberSort(inputList);
     }
 
-    // Метод для фільтрації списку імен
+
     private static List<String> filterNames(List<String> inputList) {
         Names1357 namesFilter = new Names1357();
         namesFilter.filterNames(inputList);
         return namesFilter.namesOk;
     }
 
-    // Метод для сортування і перетворення імен у верхній регістр
+
     private static List<String> sortAndConvertToUpperCase(List<String> inputList) {
         sortAndConvertToUpperCase nameProzesor = new sortAndConvertToUpperCase();
         return sortAndConvertToUpperCase.sortAndConvertToUpperCase(inputList);

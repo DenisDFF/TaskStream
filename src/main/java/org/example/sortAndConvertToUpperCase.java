@@ -10,7 +10,7 @@ import java.util.List;
             return namesWithWord.stream()
                     .map(String::toUpperCase)
                     .sorted(Collections.reverseOrder())
-                    .toList(); // Якщо ви використовуєте Java 16+
+                    .toList();
         }
     }
 
