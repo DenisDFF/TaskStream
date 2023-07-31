@@ -1,10 +1,7 @@
 package org.example;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Stream;
-import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
@@ -63,7 +60,7 @@ public class Main {
 
     private static List<String> filterNames(List<String> namesWithWord) {
         Names1357 namesFilter = new Names1357();
-        List<String> namesOk = namesFilter.filterNames(namesWithWord);
+        List<String> namesOk = Collections.singletonList(namesFilter.filterNames(namesWithWord));
         return namesOk;
     }
 
