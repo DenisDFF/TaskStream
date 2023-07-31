@@ -61,16 +61,16 @@ public class Main {
     }
 
 
-    private static List<String> filterNames(List<String> inputList) {
+    private static List<String> filterNames(List<String> namesWithWord) {
         Names1357 namesFilter = new Names1357();
-        namesFilter.filterNames(inputList);
-        return namesFilter.namesOk;
+        List<String> namesOk = namesFilter.filterNames(namesWithWord);
+        return namesOk;
     }
 
 
     private static List<String> sortAndConvertToUpperCase(List<String> inputList) {
-        sortAndConvertToUpperCase nameProzesor = new sortAndConvertToUpperCase();
-        return sortAndConvertToUpperCase.sortAndConvertToUpperCase(inputList);
+        SortAndConvertToUpperCase nameProzesor = new SortAndConvertToUpperCase();
+        return SortAndConvertToUpperCase.sortAndConvertToUpperCase(inputList);
     }
 
 
